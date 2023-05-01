@@ -46,32 +46,4 @@ const router = Router();
 // });
 
 
-router.get('/', (req: Request, res: Response) => {
-    if (req.session && req.session.loggedIn) {
-        res.send(`
-        <div>
-            <div> YOU ARE LOGGED IN</div>
-            <a href="/logout">Logout</a>
-        </div>
-        `)
-    } else {
-        res.send(`
-        <div>
-            <div> YOU ARE NOT LOGGED IN</div>
-            <a href="/login">Login</a>
-        </div>
-        `)
-    }
-})
-
-router.get('/logout', (req: Request, res: Response) => {
-    req.session = undefined;
-    res.redirect('/')
-});
-
-
-router.get('/protected', requireAuth, (req: Request, res: Response) => {
-    res.send('Welcome to the protected route, logged in user')
-})
-
 export {router}
